@@ -1,0 +1,26 @@
+o = vim.opt
+o.backup = false
+o.showmatch = true
+o.hlsearch = false
+o.incsearch = true
+o.tabstop = 4
+o.softtabstop = 4
+o.errorbells = false
+o.expandtab = true
+o.shiftwidth = 4
+o.autoindent = true
+o.relativenumber = true
+o.number = true
+o.wildmode = { "longest", "list" }
+o.colorcolumn = 81
+o.signcolumn = true
+o.mouse = 
+o.clipboard = "unnamedplus"
+o.cursorline = true
+o.scrolloff = 10
+o.smartcase = true
+o.ignorecase = true
+o.showcmd = true
+
+o.path+=**
+o.wildmenu = true
