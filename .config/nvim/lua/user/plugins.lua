@@ -20,8 +20,11 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
-    -- Colorscheme
+    -- Colorschemes
     use 'morhetz/gruvbox'
+    use 'folke/tokyonight.nvim'
+    -- Enhances netrw
+    use 'tpope/vim-vinegar'
     -- LSP
     use 'williamboman/mason.nvim'
     use "williamboman/mason-lspconfig.nvim"
@@ -35,6 +38,12 @@ return require('packer').startup(function(use)
     -- For luasnip users.
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
+    -- Syntax highlighting
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+    }
+    use 'akinsho/toggleterm.nvim'
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
