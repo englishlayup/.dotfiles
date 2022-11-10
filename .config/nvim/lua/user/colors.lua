@@ -1,7 +1,7 @@
 local colorschemes = {
-    'tokyonight-night',
-    'gruvbox',
     'tokyonight',
+    'gruvbox',
+    'tokyonight-night',
 }
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorschemes[math.random(#colorschemes)])
