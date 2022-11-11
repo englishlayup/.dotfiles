@@ -21,10 +21,11 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     -- Colorschemes
-    use 'morhetz/gruvbox'
+    use 'ellisonleao/gruvbox.nvim'
     use 'folke/tokyonight.nvim'
     -- Enhances netrw
     use 'tpope/vim-vinegar'
+    use 'tpope/vim-repeat'
     use 'tpope/vim-surround'
     -- LSP
     use 'williamboman/mason.nvim'
@@ -36,7 +37,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
-    -- For luasnip users.
+    -- Snippet engine
     use 'L3MON4D3/LuaSnip'
     use 'saadparwaiz1/cmp_luasnip'
     -- Syntax highlighting
@@ -44,10 +45,24 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
     }
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+    -- Brackets stuff
     use 'p00f/nvim-ts-rainbow'
     use {
         'windwp/nvim-autopairs',
         config = function() require('nvim-autopairs').setup {} end
+    }
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
     }
     -- Toggle terminal
     use 'akinsho/toggleterm.nvim'

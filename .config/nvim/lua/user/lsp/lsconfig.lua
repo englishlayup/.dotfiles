@@ -102,7 +102,11 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 
 require('lspconfig')['pyright'].setup {
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
+    filetypes = {
+        'python',
+        'cfg',
+    }
 }
 
 require('lspconfig')['sumneko_lua'].setup {
@@ -125,5 +129,9 @@ require('lspconfig')['sumneko_lua'].setup {
 
 require('lspconfig')['bashls'].setup {
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
+    filetypes = {
+        'sh',
+        'make',
+    }
 }

@@ -14,7 +14,10 @@ configs.setup({
     autopairs = {
         enable = true,
     },
-    indent = { enable = true, disable = { "" } },
+    indent = {
+        enable = true,
+        disable = { "" }
+    },
     rainbow = {
         enable = true,
         -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -22,5 +25,26 @@ configs.setup({
         max_file_lines = nil, -- Do not enable for files with more than n lines, int
         -- colors = {}, -- table of hex strings
         -- termcolors = {} -- table of colour name strings
-    }
+    },
+    textobjects = {
+        select = {
+            enable = true,
+            -- Automatically jump forward to textobj, similar to targets.vim
+            lookahead = true,
+            keymaps = {
+                -- You can use the capture groups defined in textobjects.scm
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["aF"] = "@frame.outer",
+                ["iF"] = "@frame.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+                ["al"] = "@loop.outer",
+                ["il"] = "@loop.inner",
+                ["aC"] = "@conditional.outer",
+                ["iC"] = "@conditional.inner",
+                ["iS"] = "@scopename.inner",
+            },
+        },
+    },
 })
