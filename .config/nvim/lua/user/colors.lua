@@ -1,10 +1,7 @@
-local colorschemes = {
-    'tokyonight',
-    'gruvbox',
-    'tokyonight-night',
-}
+local colorscheme = 'tokyonight' -- 'gruvbox' -- 'tokyonight-night'
 
-local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorschemes[math.random(#colorschemes)])
+
+local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 if not status_ok then
     vim.notify('colorscheme ' .. colorscheme .. ' not found!')
     return
