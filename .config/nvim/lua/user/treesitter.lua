@@ -16,7 +16,7 @@ configs.setup({
     },
     indent = {
         enable = true,
-        disable = { "" }
+        -- disable = { "" }
     },
     rainbow = {
         enable = true,
@@ -35,15 +35,6 @@ configs.setup({
                 -- You can use the capture groups defined in textobjects.scm
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
-                ["aF"] = "@frame.outer",
-                ["iF"] = "@frame.inner",
-                ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner",
-                ["al"] = "@loop.outer",
-                ["il"] = "@loop.inner",
-                ["aC"] = "@conditional.outer",
-                ["iC"] = "@conditional.inner",
-                ["iS"] = "@scopename.inner",
             },
         },
     },

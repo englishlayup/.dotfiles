@@ -1,4 +1,4 @@
-local colorscheme = 'tokyonight' -- 'gruvbox' -- 'tokyonight-night'
+local colorscheme = 'tokyonight-night' -- 'gruvbox' -- 'tokyonight-night'
 
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
