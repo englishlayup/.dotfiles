@@ -1,5 +1,4 @@
 local o = vim.opt
-local g = vim.g
 o.tabstop=4
 o.softtabstop=4
 o.expandtab=true
@@ -8,7 +7,7 @@ o.autoindent=true
 o.relativenumber=true
 o.number=true
 o.wildmode={"list", "longest"}
-o.signcolumn="number"
+o.signcolumn="auto"
 o.scrolloff=10
 o.ignorecase=true
 o.smartcase=true
