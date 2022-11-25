@@ -65,8 +65,6 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 " - <CR>/v/t to open in an h-split/v-split/tab
 " - check |netrw-browse-maps| for more mappings
 
-colorscheme gruvbox
-
 " Hard Mode
 nnoremap <Left> :echo "Arrow keys are disabled"<CR>
 vnoremap <left> :<C-u>echo "Arrow keys are disabled"<CR>
