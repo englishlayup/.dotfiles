@@ -8,7 +8,8 @@ o.relativenumber=true
 o.number=true
 o.wildmode={"list", "longest"}
 o.signcolumn="auto"
-o.scrolloff=10
+o.scrolloff=8
+o.cursorline=true
 o.ignorecase=true
 o.smartcase=true
 o.showmatch=true
@@ -22,7 +23,6 @@ o.backup = false
 o.undodir = os.getenv('HOME') .. '/.vim/undodir'
 o.undofile = true
 o.termguicolors=true
-o.clipboard="unnamedplus"
 o.mouse=""
 -- FINDING FILES:
 

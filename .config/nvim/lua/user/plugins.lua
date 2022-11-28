@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
     use 'folke/tokyonight.nvim'
     -- Enhances netrw
     use 'tpope/vim-vinegar'
+
     use 'tpope/vim-repeat'
     use 'tpope/vim-surround'
     -- LSP
