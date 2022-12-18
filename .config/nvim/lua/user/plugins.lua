@@ -65,6 +65,8 @@ return require('packer').startup(function(use)
             require('gitsigns').setup()
         end
     }
+    -- Github Copilot
+    use 'github/copilot.vim'
     -- Toggle terminal
     use 'akinsho/toggleterm.nvim'
     -- Automatically set up your configuration after cloning packer.nvim
