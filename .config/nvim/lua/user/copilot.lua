@@ -1,2 +1,5 @@
-vim.api.nvim_set_keymap("i", "<C-J>", ":copilot#Accept('\\<CR>')<CR>", {silent=true})
-vim.g.copilot_no_tab_map = true
+-- bind Ctrl+Shift+J to copilot completion
+vim.cmd [[
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+]]
