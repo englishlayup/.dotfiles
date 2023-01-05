@@ -14,7 +14,6 @@ filetype plugin indent on       " allow auto-indenting depending on file type
 syntax on                       " syntax highlighting
 filetype plugin on
 set mouse=                      " disable mouse click
-set clipboard+="unnamedplus"    " use system clipboard
 set cursorline                  " highlight current cursorline
 set ttyfast                     " Speed up scrolling in Vim
 set scrolloff=10                " Keep cursor more centered while scrolling
@@ -69,18 +68,18 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 nnoremap <Left> :echo "Arrow keys are disabled"<CR>
 vnoremap <left> :<C-u>echo "Arrow keys are disabled"<CR>
 inoremap <Left> <C-o>:echo "Arrow keys are disabled"<CR>
-
 nnoremap <Right> :echo "Arrow keys are disabled"<CR>
 vnoremap <Right> :<C-u>echo "Arrow keys are disabled"<CR>
 inoremap <Right> <C-o>:echo "Arrow keys are disabled"<CR>
-
 nnoremap <Up> :echo "Arrow keys are disabled"<CR>
 vnoremap <Up> :<C-u>echo "Arrow keys are disabled"<CR>
 inoremap <Up> <C-o>:echo "Arrow keys are disabled"<CR>
-
 nnoremap <Down> :echo "Arrow keys are disabled"<CR>
 vnoremap <Down> :<C-u>echo "Arrow keys are disabled"<CR>
 inoremap <Down> <C-o>:echo "Arrow keys are disabled"<CR>
 
-"Allow saving of files as sudo when I forgot to start vim using sudo. 
-"cnoremap w!! w !sudo tee > /dev/null % 
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif

@@ -20,6 +20,7 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
+    use 'nvim-lua/plenary.nvim'
     -- Colorschemes
     use 'ellisonleao/gruvbox.nvim'
     use 'folke/tokyonight.nvim'
@@ -32,6 +33,8 @@ return require('packer').startup(function(use)
     use 'williamboman/mason.nvim'
     use "williamboman/mason-lspconfig.nvim"
     use 'neovim/nvim-lspconfig'
+    -- Format and Linters
+    use 'jose-elias-alvarez/null-ls.nvim'
     -- Auto completion
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -69,6 +72,7 @@ return require('packer').startup(function(use)
     use 'github/copilot.vim'
     -- Toggle terminal
     use 'akinsho/toggleterm.nvim'
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
