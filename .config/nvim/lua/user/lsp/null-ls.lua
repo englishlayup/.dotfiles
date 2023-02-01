@@ -16,6 +16,7 @@ null_ls.setup({
                 "scss",
                 "json",
                 "yaml",
+                "markdown",
                 "html",
             },
             extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
@@ -26,6 +27,12 @@ null_ls.setup({
             },
         }),
         null_ls.builtins.diagnostics.flake8.with({
+            filetypes = { "python" },
+        }),
+        null_ls.builtins.diagnostics.mypy.with({
+            filetypes = { "python" },
+        }),
+        null_ls.builtins.formatting.black.with({
             filetypes = { "python" },
         }),
     },
