@@ -1,3 +1,2 @@
-!/.config/**
-/.config/nvim/plugin
-/.config/github-copilot
+# Prevent weird recursion problems
+.dotfiles
