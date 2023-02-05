@@ -36,6 +36,13 @@ alias nvim="/usr/local/bin/nvim.appimage"
 All the plugins should be installed the first time you launch `nvim`. A few errors are expected, ignore them ;) ;)
 Start `nvim` then type `:PackerSync` to update all plugins
 
+### Use the Windows clipboard from WSL
+
+curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
+chmod +x /tmp/win32yank.exe
+sudo mv /tmp/win32yank.exe /usr/local/bin/
+
 ## Tmux
 
 ## Zsh
