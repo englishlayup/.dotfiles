@@ -55,7 +55,7 @@ source /usr/local/share/zsh/plugins/zsh-z/zsh-z.plugin.zsh
 bindkey '^ ' autosuggest-accept
 
 # p10k theme
-source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
+source /usr/local/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
