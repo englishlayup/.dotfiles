@@ -6,3 +6,5 @@ if not status_ok then
     vim.notify('colorscheme ' .. colorscheme .. ' not found!')
     return
 end
+
+vim.cmd [[highlight Normal guibg=NONE ctermbg=NONE]]
