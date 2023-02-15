@@ -3,8 +3,8 @@
 ## Bare cloning this repo to a new system
 
 ```bash
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 git clone --bare https://github.com/englishlayup/.dotfiles.git $HOME/.dotfiles
+source .zshrc
 config checkout
 config config --local status.showUntrackedFiles no
 ```

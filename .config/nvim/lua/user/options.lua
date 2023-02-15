@@ -24,6 +24,7 @@ o.undodir = os.getenv('HOME') .. '/.vim/undodir'
 o.undofile = true
 o.termguicolors = true
 o.mouse = ""
+
 -- FINDING FILES:
 
 -- Search down into subfolders
