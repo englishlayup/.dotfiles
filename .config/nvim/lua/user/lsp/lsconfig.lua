@@ -125,6 +125,9 @@ require("lspconfig")["lua_ls"].setup({
 			},
 		},
 	},
+    filetypes = {
+        "lua",
+    },
 })
 
 require("lspconfig")["bashls"].setup({

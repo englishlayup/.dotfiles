@@ -32,7 +32,7 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 # History in cache directory
-HISTSIZE=10000
+HISTSIZE=12000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 

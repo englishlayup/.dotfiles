@@ -7,6 +7,7 @@ git clone --bare https://github.com/englishlayup/.dotfiles.git $HOME/.dotfiles
 source .zshrc
 config checkout
 config config --local status.showUntrackedFiles no
+mkdir ~/.cache/zsh
 ```
 
 If `config checkout` failed because some config files already existed, use this to back them up them:
@@ -44,6 +45,8 @@ chmod +x /tmp/win32yank.exe
 sudo mv /tmp/win32yank.exe /usr/local/bin/
 
 ## Zsh
+
+### Install plugins and p10k theme
 
 ```bash
 git clone https://github.com/agkozak/zsh-z.git ~/tmp/plugins/zsh-z
