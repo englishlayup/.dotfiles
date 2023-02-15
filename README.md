@@ -53,3 +53,18 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tmp/plugins/p
 sudo mv ~/tmp/plugins /usr/local/share/zsh
 rm -rf ~/tmp
 ```
+
+## Known Issues
+
+### WSL
+
+Calling any Windows executables yeilds `Invalid argument` error:
+
+```bash
+/usr/local/bin/win32yank.exe: Invalid argument
+                                              %
+/mnt/c/windows/explorer.exe: Invalid argument
+                                             %
+```
+
+Reproduce: launch neovim in tmux. Restarting the computer temporary resolves it.
