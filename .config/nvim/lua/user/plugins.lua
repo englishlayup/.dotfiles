@@ -68,6 +68,16 @@ return require('packer').startup(function(use)
             require('gitsigns').setup()
         end
     }
+    use {
+        'lukas-reineke/indent-blankline.nvim',
+        config = function()
+            require('indent_blankline').setup {
+                indent_blankline_show_first_indent_level = false,
+                show_current_context = true,
+                show_current_context_start = true,
+            }
+        end
+    }
     -- Github Copilot
     use 'github/copilot.vim'
     -- Toggle terminal
