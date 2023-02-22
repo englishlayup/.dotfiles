@@ -105,7 +105,6 @@ require("lspconfig")["pyright"].setup({
 	capabilities = capabilities,
 	filetypes = {
 		"python",
-		"cfg",
 	},
 })
 
@@ -135,7 +134,6 @@ require("lspconfig")["bashls"].setup({
 	capabilities = capabilities,
 	filetypes = {
 		"sh",
-		"make",
 	},
 })
 
