@@ -3,6 +3,7 @@
 ## Bare cloning this repo to a new system
 
 ```bash
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 git clone --bare https://github.com/englishlayup/.dotfiles.git $HOME/.dotfiles
 source .zshrc
 config checkout
@@ -34,7 +35,7 @@ alias nvim="/usr/local/bin/nvim.appimage"
 
 ### Setup Neovim plugins
 
-All the plugins should be installed the first time you launch `nvim`. A few errors are expected, ignore them ;) ;)
+All the plugins should be installed the first time you launch `nvim`.
 Start `nvim` then type `:PackerSync` to update all plugins
 
 ### Use the Windows clipboard from WSL
@@ -70,4 +71,10 @@ Calling any Windows executables yeilds `Invalid argument` error:
                                              %
 ```
 
-Reproduce: launch neovim in tmux. Restarting the computer temporary resolves it.
+Reproduce: ???
+
+## TODO
+
+- [ ] Automatic lsp and linter installation with [mason](https://github.com/williamboman/mason-lspconfig.nvim#automatic-server-setup-advanced-feature)
+- [ ] Install [telescope](https://github.com/nvim-telescope/telescope.nvim)
+- [ ] Figure out [dap](https://github.com/mfussenegger/nvim-dap)
