@@ -21,28 +21,41 @@ local packer_bootstrap = ensure_packer()
 return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("nvim-lua/plenary.nvim")
+	use({
+		"nvim-telescope/telescope.nvim",
+		branch = "0.1.x",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+		},
+	})
 	-- Colorschemes
 	use("ellisonleao/gruvbox.nvim")
 	use("folke/tokyonight.nvim")
-	-- Enhances netrw
-	use("tpope/vim-vinegar")
+	--
+	use("tpope/vim-vinegar") -- Enhances netrw
 	use("tpope/vim-repeat")
 	use("tpope/vim-surround")
 	-- LSP
 	use("williamboman/mason.nvim")
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
-	-- Format and Linters
-	use("jose-elias-alvarez/null-ls.nvim")
+	--
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+		},
+	}) -- Formaters and Linters
 	-- Auto completion
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
-	-- Snippet engine
 	use("L3MON4D3/LuaSnip")
 	use("saadparwaiz1/cmp_luasnip")
+	--
 	-- Syntax highlighting
 	use({
 		"nvim-treesitter/nvim-treesitter",
@@ -51,8 +64,12 @@ return require("packer").startup(function(use)
 			ts_update()
 		end,
 	})
-	use("nvim-treesitter/nvim-treesitter-textobjects")
-	-- Brackets stuff
+	--
+	use({
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		after = "nvim-treesitter",
+		requires = "nvim-treesitter/nvim-treesitter",
+	})
 	use("p00f/nvim-ts-rainbow")
 	use({
 		"windwp/nvim-autopairs",
@@ -82,11 +99,8 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
-	-- Github Copilot
-	use("github/copilot.vim")
-	-- Toggle terminal
-	use("akinsho/toggleterm.nvim")
-
+	use("github/copilot.vim") -- Github Copilot
+	use("akinsho/toggleterm.nvim") -- Toggle terminal
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if packer_bootstrap then
