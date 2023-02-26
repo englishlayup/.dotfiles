@@ -10,6 +10,9 @@ keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- netrw
+vim.keymap.set("n", "<leader>nn", vim.cmd.Ex)
+
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
