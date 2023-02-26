@@ -46,7 +46,7 @@ return require("packer").startup(function(use)
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 		},
-	}) -- Formaters and Linters
+	})
 	-- Auto completion
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
