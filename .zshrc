@@ -37,6 +37,9 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
+# Create cache directory if it doesn't exist
+[ -d ~/.cache/zsh ] || mkdir -p ~/.cache/zsh
+
 # History in cache directory
 HISTSIZE=12000
 SAVEHIST=10000
