@@ -16,7 +16,8 @@ fi
 
 # Aliases
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias ll="ls -la"
+alias ll="ls -lha"
+alias la="ls -ah"
 git config --global alias.st "status -uno -sb"
 git config --global alias.tree 'log --graph --oneline --decorate'
 
