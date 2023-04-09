@@ -4,7 +4,7 @@ if command -v tmux &> /dev/null \
     && [[ ! "$TERM" =~ screen ]] \
     && [[ ! "$TERM" =~ tmux ]] \
     && [ -z "$TMUX" ]; then
-    exec tmux new-session -A -s 0
+    tmux new-session -A -s 0
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
