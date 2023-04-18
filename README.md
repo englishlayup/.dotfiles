@@ -58,6 +58,13 @@ sudo mv ~/tmp/plugins /usr/local/share/zsh
 rm -rf ~/tmp
 ```
 
+### Install fzf
+
+```bash
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
 ## Known Issues
 
 ### WSL

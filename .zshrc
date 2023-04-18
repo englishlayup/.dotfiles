@@ -71,6 +71,9 @@ source /usr/local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^ ' autosuggest-accept
 
+# load fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # p10k theme
 source /usr/local/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
