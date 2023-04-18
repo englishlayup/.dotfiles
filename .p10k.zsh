@@ -42,11 +42,11 @@
     nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     vcs                     # git status
+    status                  # exit code of the last command
     # =========================[ Line #2 ]=========================
     newline                 # \n
     context                 # user@hostname
     dir                     # current directory
-    status                  # exit code of the last command
     prompt_char             # prompt symbol
   )
 
