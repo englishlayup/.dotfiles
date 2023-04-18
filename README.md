@@ -39,17 +39,18 @@ Start `nvim` then type `:PackerSync` to update all plugins
 
 ### Use the Windows clipboard from WSL
 
+```bash
 curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
 unzip -p /tmp/win32yank.zip win32yank.exe > /tmp/win32yank.exe
 chmod +x /tmp/win32yank.exe
 sudo mv /tmp/win32yank.exe /usr/local/bin/
+```
 
 ## Zsh
 
 ### Install plugins and p10k theme
 
 ```bash
-git clone https://github.com/agkozak/zsh-z.git ~/tmp/plugins/zsh-z
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/tmp/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/tmp/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tmp/plugins/powerlevel10k
