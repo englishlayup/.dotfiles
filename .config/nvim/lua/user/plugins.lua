@@ -50,6 +50,13 @@ return require("packer").startup(function(use)
 			{ "nvim-lua/plenary.nvim" },
 		},
 	})
+	use({
+		"jay-babu/mason-null-ls.nvim",
+		requires = {
+			{ "jose-elias-alvarez/null-ls.nvim" },
+			{ "williamboman/mason.nvim" },
+		},
+	})
 	-- Auto completion
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
