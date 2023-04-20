@@ -37,7 +37,10 @@ return require("packer").startup(function(use)
 	use("tpope/vim-repeat")
 	use("tpope/vim-surround")
 	-- LSP
-	use("williamboman/mason.nvim")
+	use({
+		"williamboman/mason.nvim",
+		run = ":MasonUpdate", -- :MasonUpdate updates registry contents
+	})
 	use("williamboman/mason-lspconfig.nvim")
 	use("neovim/nvim-lspconfig")
 	--
