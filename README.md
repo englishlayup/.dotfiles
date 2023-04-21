@@ -10,7 +10,8 @@ config config --local status.showUntrackedFiles no
 source .zshrc
 ```
 
-If `config checkout` failed because some config files already existed, use this to back them up them:
+If `config checkout` failed because some config files already existed, use this
+to back them up:
 
 ```bash
 mkdir -p .config-backup && \
