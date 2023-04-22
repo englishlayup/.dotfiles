@@ -51,12 +51,21 @@ bindkey '^e' edit-command-line
 # Create cache directory if it doesn't exist
 [ -d ~/.cache/zsh ] || mkdir -p ~/.cache/zsh
 
+# Load API keys
+[ -f ~/.env ] && source ~/.env
+
 # History in cache directory
 HISTSIZE=12000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
 
-export EDITOR=nvim
+# Set editor to nvim if available
+# else use vim
+if command -v nvim &> /dev/null; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
