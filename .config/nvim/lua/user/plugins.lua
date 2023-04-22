@@ -80,12 +80,7 @@ return require("packer").startup(function(use)
 		after = "nvim-treesitter",
 		requires = "nvim-treesitter/nvim-treesitter",
 	})
-	use({
-		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			require("treesitter-context.config").setup()
-		end,
-	})
+	use("nvim-treesitter/nvim-treesitter-context")
 	use({
 		"windwp/nvim-autopairs",
 		config = function()
