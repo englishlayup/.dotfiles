@@ -44,13 +44,13 @@ configs.setup({
 			set_jumps = true, -- whether to set jumps in the jumplist
 			goto_next_start = {
 				["]]"] = "@function.outer",
-                ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-                ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+				["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+				["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
 			},
 			goto_previous_start = {
 				["[["] = "@function.outer",
-                ["[s"] = { query = "@scope", query_group = "locals", desc = "Prev scope" },
-                ["[z"] = { query = "@fold", query_group = "folds", desc = "Prev fold" },
+				["[s"] = { query = "@scope", query_group = "locals", desc = "Prev scope" },
+				["[z"] = { query = "@fold", query_group = "folds", desc = "Prev fold" },
 			},
 		},
 	},
