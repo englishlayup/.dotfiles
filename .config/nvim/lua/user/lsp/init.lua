@@ -1,13 +1,7 @@
-require("mason").setup()
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		"rust_analyzer",
-		"pyright",
-		"dockerls",
-		"lua_ls",
-		"bashls",
-	},
-})
+local b_status_ok, telescope_builtin = pcall(require, "telescope.builtin")
+if not b_status_ok then
+	return
+end
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -15,7 +9,7 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
+vim.keymap.set("n", "<leader>q", telescope_builtin.diagnostics, opts)
 
 local signs = {
 	Error = "",
@@ -53,8 +47,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 	border = "rounded",
 })
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -62,19 +54,19 @@ local on_attach = function(client, bufnr)
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+	vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "gi", telescope_builtin.lsp_implementations, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
 	vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
 	vim.keymap.set("n", "<leader>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, bufopts)
-	vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
+	vim.keymap.set("n", "<leader>D", telescope_builtin.lsp_type_definitions, bufopts)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+	vim.keymap.set("n", "gr", telescope_builtin.lsp_references, bufopts)
 	vim.keymap.set("n", "<leader>f", function()
 		vim.lsp.buf.format({ async = true })
 	end, bufopts)
@@ -99,9 +91,10 @@ local on_attach = function(client, bufnr)
 	end
 
 	if client.supports_method("textDocument/formatting") then
-		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+		vim.api.nvim_create_augroup("lsp_document_format", {})
+		vim.api.nvim_clear_autocmds({ group = "lsp_document_format", buffer = bufnr })
 		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = augroup,
+			group = "lsp_document_format",
 			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.format({ bufnr = bufnr })
@@ -115,9 +108,17 @@ local status_cmp_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_cmp_ok then
 	return
 end
-
 local capabilities = cmp_nvim_lsp.default_capabilities()
-
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"rust_analyzer",
+		"pyright",
+		"dockerls",
+		"lua_ls",
+		"bashls",
+	},
+})
 local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
 	function(server_name)
