@@ -54,11 +54,10 @@ sudo mv /tmp/win32yank.exe /usr/local/bin/
 ### Install plugins and p10k theme
 
 ```bash
-git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/tmp/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/tmp/plugins/zsh-syntax-highlighting
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/tmp/plugins/powerlevel10k
-sudo mv ~/tmp/plugins /usr/local/share/zsh
-rm -rf ~/tmp
+git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/agkozak/zsh-z ~/.zsh/plugins/zsh-z
+git clone --depth=2 https://github.com/romkatv/powerlevel10k.git ~/.zsh/plugins/powerlevel10k
 ```
 
 ### Install fzf

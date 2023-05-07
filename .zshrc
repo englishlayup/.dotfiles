@@ -49,10 +49,10 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 # Create cache directory if it doesn't exist
-[ -d ~/.cache/zsh ] || mkdir -p ~/.cache/zsh
+[ -d $HOME/.cache/zsh ] || mkdir -p $HOME/.cache/zsh
 
 # Load API keys
-[ -f ~/.env ] && source ~/.env
+[ -f $HOME/.env ] && source $HOME/.env
 
 # History in cache directory
 HISTSIZE=12000
@@ -76,18 +76,21 @@ export NVM_DIR="$HOME/.nvm"
 export PATH=$HOME/.local/bin:$PATH
 
 # zsh-autosuggestions config
-source /usr/local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^ ' autosuggest-accept
 
 # load fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+
+# zsh-z config
+source $HOME/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
 
 # p10k theme
-source /usr/local/share/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
+source $HOME/.zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
