@@ -90,8 +90,4 @@ Calling any Windows executables yeilds `Invalid argument` error:
 
 Reproduce: ???
 
-## TODO
-
-- Automatic lsp and linter installation with [mason](https://github.com/williamboman/mason-lspconfig.nvim#automatic-server-setup-advanced-feature)
-- Install [telescope](https://github.com/nvim-telescope/telescope.nvim)
-- Figure out [dap](https://github.com/mfussenegger/nvim-dap)
+Occurs on WSL
