@@ -13,6 +13,9 @@ vim.g.maplocalleader = " "
 -- netrw
 vim.keymap.set("n", "<leader>nn", vim.cmd.Ex)
 
+-- gitsigns
+vim.keymap.set("n", "<leader>gb", ":Gitsigns toggle_current_line_blame<CR>", opts)
+
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
