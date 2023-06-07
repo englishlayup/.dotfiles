@@ -42,7 +42,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
 # Load system-specific aliases and shortcuts if existent.
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
+[ -f "$HOME/.config/local_alias" ] && source "$HOME/.config/local_alias"
 
 # Create cache directory if it doesn't exist
 [ -d $HOME/.cache/zsh ] || mkdir -p $HOME/.cache/zsh
