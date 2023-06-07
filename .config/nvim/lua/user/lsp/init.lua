@@ -121,29 +121,57 @@ require("mason-lspconfig").setup({
 })
 local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
-	function(server_name)
-		lspconfig[server_name].setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-		})
-	end,
-	["lua_ls"] = function()
-		lspconfig.lua_ls.setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-					},
-					workspace = {
-						library = {
-							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-							[vim.fn.stdpath("config") .. "/lua"] = true,
-						},
-					},
-				},
-			},
-		})
-	end,
+    function(server_name)
+        lspconfig[server_name].setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+        })
+    end,
+    ["lua_ls"] = function()
+        lspconfig.lua_ls.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            settings = {
+                Lua = {
+                    diagnostics = {
+                        globals = { "vim" },
+                    },
+                    workspace = {
+                        library = {
+                            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                            [vim.fn.stdpath("config") .. "/lua"] = true,
+                        },
+                    },
+                },
+            },
+        })
+    end,
+})
+
+-- null-ls setup
+local null_ls_ok, null_ls = pcall(require, "null-ls")
+if not null_ls_ok then
+    return
+end
+
+require("mason").setup()
+require("mason-null-ls").setup({
+    ensure_installed = {
+        "stylua",
+        "prettier",
+        "flake8",
+        "mypy",
+        "black",
+    },
+    automatic_installation = false,
+    handlers = {},
+})
+
+null_ls.setup({
+    on_attach = on_attach,
+    sources = {
+        null_ls.builtins.formatting.prettier.with({
+            extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
+        }),
+    },
 })
