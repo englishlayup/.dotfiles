@@ -7,7 +7,6 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 git clone --bare https://github.com/englishlayup/.dotfiles.git $HOME/.dotfiles
 config checkout
 config config --local status.showUntrackedFiles no
-source .zshrc
 ```
 
 If `config checkout` failed because some config files already existed, use this
@@ -25,13 +24,18 @@ Then run `config checkout` again.
 
 ### Setup [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 
+Download neovim appimage. Create symlink to nvim.
+
 ```bash
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 sudo mv ./nvim.appimage /usr/local/bin/
-# Create soft link
 sudo ln -s /usr/local/bin/nvim.appimage /usr/local/bin/nvim
-# Or alias
+```
+
+Or use alias
+
+```bash
 alias nvim="/usr/local/bin/nvim.appimage"
 ```
 
@@ -39,6 +43,15 @@ alias nvim="/usr/local/bin/nvim.appimage"
 
 All the plugins should be installed the first time you launch `nvim`.
 Start `nvim` then type `:PackerSync` to update all plugins
+
+#### Node.js
+
+Some LSPs and plugins require `node`. I prefer to install `node` using `nvm`
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+nvm install node
+```
 
 ### Use the Windows clipboard from WSL
 
