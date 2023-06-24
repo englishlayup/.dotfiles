@@ -1,80 +1,64 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-	return
-end
-
-configs.setup({
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+-- [[ Configure Treesitter ]]
+-- See `:help nvim-treesitter`
+require("nvim-treesitter.configs").setup({
+	ensure_installed = { "c", "cpp", "python", "lua", "vim", "vimdoc", "query" },
 	sync_install = false,
-	auto_install = true, -- Automatically install missing parsers when entering buffer
-	highlight = {
+	auto_install = false,
+	highlight = { enable = true },
+	autopairs = { enable = true },
+	indent = { enable = true },
+	foldings = { enable = true },
+	incremental_selection = {
 		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-	autopairs = {
-		enable = true,
-	},
-	indent = {
-		enable = true,
-	},
-	foldings = {
-		enable = true,
+		keymaps = {
+			init_selection = "<c-space>",
+			node_incremental = "<c-space>",
+			scope_incremental = "<c-s>",
+			node_decremental = "<M-space>",
+		},
 	},
 	textobjects = {
 		select = {
 			enable = true,
-			lookahead = true,
+			lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
 			keymaps = {
+				-- You can use the capture groups defined in textobjects.scm
+				["aa"] = "@parameter.outer",
+				["ia"] = "@parameter.inner",
 				["af"] = "@function.outer",
 				["if"] = "@function.inner",
-				["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
-			},
-			swap = {
-				enable = true,
-				swap_next = {
-					["<leader>a"] = "@parameter.inner",
-				},
-				swap_previous = {
-					["<leader>A"] = "@parameter.inner",
-				},
+				["ac"] = "@class.outer",
+				["ic"] = "@class.inner",
 			},
 		},
 		move = {
 			enable = true,
 			set_jumps = true, -- whether to set jumps in the jumplist
 			goto_next_start = {
-				["]]"] = "@function.outer",
-				["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-				["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+				["]m"] = "@function.outer",
+				["]]"] = "@class.outer",
+			},
+			goto_next_end = {
+				["]M"] = "@function.outer",
+				["]["] = "@class.outer",
 			},
 			goto_previous_start = {
-				["[["] = "@function.outer",
-				["[s"] = { query = "@scope", query_group = "locals", desc = "Prev scope" },
-				["[z"] = { query = "@fold", query_group = "folds", desc = "Prev fold" },
+				["[m"] = "@function.outer",
+				["[["] = "@class.outer",
+			},
+			goto_previous_end = {
+				["[M"] = "@function.outer",
+				["[]"] = "@class.outer",
+			},
+		},
+		swap = {
+			enable = true,
+			swap_next = {
+				["<leader>a"] = "@parameter.inner",
+			},
+			swap_previous = {
+				["<leader>A"] = "@parameter.inner",
 			},
 		},
 	},
 })
-
--- Set up tree-sitter based folding
-vim.cmd([[
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-  set nofoldenable
-]])
-
-local ts_repeat_ok, ts_repeat_move = pcall(require, "nvim-treesitter.textobjects.repeatable_move")
-if not ts_repeat_ok then
-	return
-end
-
--- Repeat movement with ; and ,
--- ensure ; goes forward and , goes backward regardless of the last direction
-vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
-vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
-
--- make builtin f, F, t, T also repeatable with ; and ,
-vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
-vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
-vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)

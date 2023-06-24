@@ -109,7 +109,6 @@ if not status_cmp_ok then
     return
 end
 local capabilities = cmp_nvim_lsp.default_capabilities()
-require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "rust_analyzer",

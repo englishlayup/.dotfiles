@@ -1,120 +1,171 @@
-local ensure_packer = function()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
-		vim.cmd([[packadd packer.nvim]])
-		return true
-	end
-	return false
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]])
+require("lazy").setup({
+	-- NOTE: First, some plugins that don't require any configuration
 
-local packer_bootstrap = ensure_packer()
+	-- Git related plugins
+	"tpope/vim-fugitive",
+	-- Detect tabstop and shiftwidth automatically
+	"tpope/vim-sleuth",
+	-- Enhance netrw
+	"tpope/vim-vinegar",
+	-- Surround vim objects
+	"tpope/vim-surround",
+	-- Repeat surround commands
+	"tpope/vim-repeat",
 
-return require("packer").startup(function(use)
-	use("wbthomason/packer.nvim")
-	use("nvim-lua/plenary.nvim")
-	use({
-		"nvim-telescope/telescope.nvim",
-		branch = "0.1.x",
-		requires = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-			{ "nvim-tree/nvim-web-devicons" },
+	"ellisonleao/gruvbox.nvim",
+	"folke/tokyonight.nvim",
+	{
+		-- LSP Configuration & Plugins
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			-- Automatically install LSPs to stdpath for neovim
+			{ "williamboman/mason.nvim", config = true },
+			"williamboman/mason-lspconfig.nvim",
+			-- Useful status updates for LSP
+			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+			{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
+			-- Additional lua configuration, makes nvim stuff amazing!
+			"folke/neodev.nvim",
 		},
-	})
-	-- Colorschemes
-	use("ellisonleao/gruvbox.nvim")
-	use("folke/tokyonight.nvim")
-	--
-	use("tpope/vim-vinegar") -- Enhances netrw
-	use("tpope/vim-repeat")
-	use("tpope/vim-surround")
-	-- LSP
-	use({
-		"williamboman/mason.nvim",
-		run = ":MasonUpdate", -- :MasonUpdate updates registry contents
-	})
-	use("williamboman/mason-lspconfig.nvim")
-	use("neovim/nvim-lspconfig")
-	--
-	use({
+	},
+	{
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = {
 			{ "nvim-lua/plenary.nvim" },
 		},
-	})
-	use({
+	},
+	{
 		"jay-babu/mason-null-ls.nvim",
 		requires = {
 			{ "jose-elias-alvarez/null-ls.nvim" },
 			{ "williamboman/mason.nvim" },
 		},
-	})
-	-- Auto completion
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/nvim-cmp")
-	use("L3MON4D3/LuaSnip")
-	use("saadparwaiz1/cmp_luasnip")
-	--
-	-- Syntax highlighting
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = function()
-			local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
-			ts_update()
-		end,
-	})
-	--
-	use({
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		after = "nvim-treesitter",
-		requires = "nvim-treesitter/nvim-treesitter",
-	})
-	use("nvim-treesitter/nvim-treesitter-context")
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup()
-		end,
-	})
-	use({
-		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup()
-		end,
-	})
-	use({
+	},
+	{
+		-- Auto completion
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			-- Snippet Engine & its associated nvim-cmp source
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			-- Adds LSP completion capabilities
+			"hrsh7th/cmp-nvim-lsp",
+			-- Adds a number of user-friendly snippets
+			"rafamadriz/friendly-snippets",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+		},
+	},
+	-- Useful plugin to show you pending keybinds.
+	{ "folke/which-key.nvim", opts = {} },
+	-- Adds git releated signs to the gutter, as well as utilities for managing changes
+	{
 		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
-	})
-	use({
+		opts = {
+			on_attach = function(bufnr)
+				vim.keymap.set(
+					"n",
+					"<leader>gp",
+					require("gitsigns").prev_hunk,
+					{ buffer = bufnr, desc = "[G]o to [P]revious Hunk" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>gn",
+					require("gitsigns").next_hunk,
+					{ buffer = bufnr, desc = "[G]o to [N]ext Hunk" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>ph",
+					require("gitsigns").preview_hunk,
+					{ buffer = bufnr, desc = "[P]review [H]unk" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>gb",
+					require("gitsigns").toggle_current_line_blame,
+					{ buffer = bufnr, desc = "[G]it [B]lame" }
+				)
+			end,
+		},
+	},
+	{
+		-- Set lualine as statusline
+		"nvim-lualine/lualine.nvim",
+		-- See `:help lualine.txt`
+		opts = {
+			options = {
+				icons_enabled = false,
+				theme = "solarized_dark",
+				component_separators = "|",
+				section_separators = "",
+			},
+		},
+	},
+
+	{
+		-- Highlight, edit, and navigate code
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
+		},
+		build = ":TSUpdate",
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {}, -- this is equalent to setup({}) function
+	},
+	-- "gc" to comment visual regions/lines
+	{
+		"numToStr/Comment.nvim",
+		opts = {},
+	},
+	-- Add indentation guides
+	{
 		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent_blankline").setup({
-				indent_blankline_show_first_indent_level = false,
-				show_current_context = true,
-				show_current_context_start = true,
-			})
+		opts = {
+			char = "┊",
+			indent_blankline_show_first_indent_level = false,
+			show_current_context = true,
+			show_current_context_start = true,
+		},
+	},
+
+	{
+		"nvim-telescope/telescope.nvim",
+		branch = "0.1.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+	},
+	-- Fuzzy Finder Algorithm which requires local dependencies to be built.
+	-- Only load if `make` is available. Make sure you have the system
+	-- requirements installed.
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "make",
+		cond = function()
+			return vim.fn.executable("make") == 1
 		end,
-	})
-	use("github/copilot.vim") -- Github Copilot
-	use("akinsho/toggleterm.nvim") -- Toggle terminal
-	-- Automatically set up your configuration after cloning packer.nvim
-	-- Put this at the end after all plugins
-	if packer_bootstrap then
-		require("packer").sync()
-	end
-end)
+	},
+	"nvim-tree/nvim-web-devicons",
+	"github/copilot.vim",
+	"akinsho/toggleterm.nvim",
+})

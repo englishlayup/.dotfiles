@@ -1,2 +1,6 @@
 # Prevent weird recursion problems
 .dotfiles
+
+# config files
+.luarc.json
+lazy-lock.json
