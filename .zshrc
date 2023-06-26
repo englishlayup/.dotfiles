@@ -85,7 +85,7 @@ compctl -K _pip_completion pip
 
 # Refresh SSH_AUTH_SOCK and DISPLAY in tmux
 if [ -n "$TMUX" ]; then
-    function reload_env {
+    function _reload_env {
         sshauth=$(tmux show-environment | grep "^SSH_AUTH_SOCK")
         if [ $sshauth ]; then
             export $sshauth
@@ -96,7 +96,7 @@ if [ -n "$TMUX" ]; then
         fi
     }
 else
-    function reload_env { }
+    function _reload_env { }
 fi
 
 function _activate_venv() {
@@ -113,7 +113,7 @@ function _activate_venv() {
 }
 
 autoload -U add-zsh-hook
-add-zsh-hook preexec reload_env
+add-zsh-hook preexec _reload_env
 add-zsh-hook chpwd _activate_venv
 
 # zsh-autosuggestions config
