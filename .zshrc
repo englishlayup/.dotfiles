@@ -11,7 +11,7 @@ fi
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Aliases
@@ -73,15 +73,48 @@ export PATH=$HOME/.local/bin:$PATH
 
 # pip zsh completion start
 function _pip_completion {
-  local words cword
-  read -Ac words
-  read -cn cword
-  reply=( $( COMP_WORDS="$words[*]" \
-             COMP_CWORD=$(( cword-1 )) \
-             PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null ))
+    local words cword
+    read -Ac words
+    read -cn cword
+    reply=( $( COMP_WORDS="$words[*]" \
+                COMP_CWORD=$(( cword-1 )) \
+        PIP_AUTO_COMPLETE=1 $words[1] 2>/dev/null ))
 }
 compctl -K _pip_completion pip
 # pip zsh completion end
+
+# Refresh SSH_AUTH_SOCK and DISPLAY in tmux
+if [ -n "$TMUX" ]; then
+    function reload_env {
+        sshauth=$(tmux show-environment | grep "^SSH_AUTH_SOCK")
+        if [ $sshauth ]; then
+            export $sshauth
+        fi
+        display=$(tmux show-environment | grep "^DISPLAY")
+        if [ $display ]; then
+            export $display
+        fi
+    }
+else
+    function reload_env { }
+fi
+
+function _activate_venv() {
+    if [[ -z "$VIRTUAL_ENV" ]]; then
+        if [[ -d ./venv ]]; then
+            source ./venv/bin/activate
+        fi
+    else
+        parentdir="$(dirname "$VIRTUAL_ENV")"
+        if [[ "$PWD"/ != "$parentdir"/* ]]; then
+            deactivate
+        fi
+    fi
+}
+
+autoload -U add-zsh-hook
+add-zsh-hook preexec reload_env
+add-zsh-hook chpwd _activate_venv
 
 # zsh-autosuggestions config
 source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
