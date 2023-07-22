@@ -24,6 +24,8 @@ require('lazy').setup {
     'tpope/vim-surround',
     -- Repeat surround commands
     'tpope/vim-repeat',
+    -- Seamlessly navigate between vim and tmux splits
+    'christoomey/vim-tmux-navigator',
 
     'ellisonleao/gruvbox.nvim',
     'folke/tokyonight.nvim',
