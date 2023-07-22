@@ -155,15 +155,6 @@ end
 
 require('mason').setup()
 require('mason-null-ls').setup {
-    ensure_installed = {
-        'stylua',
-        'prettier',
-        'flake8',
-        'mypy',
-        'black',
-        'buidifier',
-    },
-    automatic_installation = false,
     handlers = {},
 }
 
