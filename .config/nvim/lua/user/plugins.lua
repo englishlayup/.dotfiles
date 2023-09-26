@@ -44,19 +44,6 @@ require('lazy').setup {
         },
     },
     {
-        'jose-elias-alvarez/null-ls.nvim',
-        dependencies = {
-            { 'nvim-lua/plenary.nvim' },
-        },
-    },
-    {
-        'jay-babu/mason-null-ls.nvim',
-        dependencies = {
-            { 'jose-elias-alvarez/null-ls.nvim' },
-            { 'williamboman/mason.nvim' },
-        },
-    },
-    {
         -- Auto completion
         'hrsh7th/nvim-cmp',
         dependencies = {

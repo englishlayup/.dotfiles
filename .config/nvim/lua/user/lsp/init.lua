@@ -146,23 +146,3 @@ require('mason-lspconfig').setup_handlers {
         }
     end,
 }
-
--- null-ls setup
-local null_ls_ok, null_ls = pcall(require, 'null-ls')
-if not null_ls_ok then
-    return
-end
-
-require('mason').setup()
-require('mason-null-ls').setup {
-    handlers = {},
-}
-
-null_ls.setup {
-    on_attach = on_attach,
-    sources = {
-        null_ls.builtins.formatting.prettier.with {
-            extra_args = { '--no-semi', '--single-quote', '--jsx-single-quote' },
-        },
-    },
-}
