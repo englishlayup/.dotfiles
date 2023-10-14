@@ -28,7 +28,7 @@ Download neovim appimage. Create symlink to nvim.
 
 ```bash
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-chmod u+x nvim.appimage
+chmod ugo+x nvim.appimage
 sudo mv ./nvim.appimage /usr/local/bin/
 sudo ln -s /usr/local/bin/nvim.appimage /usr/local/bin/nvim
 ```

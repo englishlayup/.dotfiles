@@ -127,9 +127,16 @@ require('lazy').setup {
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'nvim-treesitter/nvim-treesitter-context',
         },
         build = ':TSUpdate',
+    },
+    {
+        -- Shows the context of the currently visible buffer contents
+        'nvim-treesitter/nvim-treesitter-context',
+        opts = {
+            enable = true,
+            max_lines = 1,
+        },
     },
     {
         'windwp/nvim-autopairs',
@@ -142,16 +149,7 @@ require('lazy').setup {
         opts = {},
     },
     -- Add indentation guides
-    {
-        'lukas-reineke/indent-blankline.nvim',
-        opts = {
-            char = '┊',
-            indent_blankline_show_first_indent_level = false,
-            show_current_context = true,
-            show_current_context_start = true,
-        },
-    },
-
+    { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',

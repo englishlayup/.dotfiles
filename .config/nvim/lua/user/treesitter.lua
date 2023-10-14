@@ -1,7 +1,7 @@
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'c', 'cpp', 'python', 'lua', 'vim', 'vimdoc', 'query' },
+    ensure_installed = { 'c', 'cpp', 'python', 'bash', 'go', 'lua', 'vim', 'vimdoc' },
     sync_install = false,
     auto_install = false,
     highlight = { enable = true },
