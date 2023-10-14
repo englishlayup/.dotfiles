@@ -21,9 +21,14 @@ require('lazy').setup {
     -- Enhance netrw
     'tpope/vim-vinegar',
     -- Surround vim objects
-    'tpope/vim-surround',
-    -- Repeat surround commands
-    'tpope/vim-repeat',
+    {
+        'kylechui/nvim-surround',
+        version = '*', -- Use for stability; omit to use `main` branch for the latest features
+        event = 'VeryLazy',
+        config = function()
+            require('nvim-surround').setup {}
+        end,
+    },
     -- Seamlessly navigate between vim and tmux splits
     'christoomey/vim-tmux-navigator',
 
