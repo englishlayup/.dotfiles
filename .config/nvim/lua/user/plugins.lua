@@ -137,4 +137,10 @@ require('lazy').setup {
     'nvim-tree/nvim-web-devicons',
     'github/copilot.vim',
     'akinsho/toggleterm.nvim',
+    {
+        'nvimtools/none-ls.nvim',
+        dependencies = {
+            { 'nvim-lua/plenary.nvim' },
+        },
+    },
 }
