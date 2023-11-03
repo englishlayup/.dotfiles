@@ -1,12 +1,13 @@
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { 'c', 'cpp', 'python', 'bash', 'go', 'lua', 'vim', 'vimdoc' },
+    ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'cpp', 'python', 'bash', 'go', 'rust', 'typescript' },
     sync_install = false,
     auto_install = false,
     highlight = { enable = true },
     autopairs = { enable = true },
     foldings = { enable = true },
+    indent = { enable = true },
     incremental_selection = {
         enable = true,
         keymaps = {
