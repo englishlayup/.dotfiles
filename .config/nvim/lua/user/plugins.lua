@@ -176,4 +176,13 @@ require('lazy').setup {
             { 'nvim-lua/plenary.nvim' },
         },
     },
+
+    -- Annotation generator
+    {
+        'danymat/neogen',
+        dependencies = 'nvim-treesitter/nvim-treesitter',
+        config = true,
+        version = '*',
+        opts = { snippet_engine = 'luasnip' },
+    },
 }
