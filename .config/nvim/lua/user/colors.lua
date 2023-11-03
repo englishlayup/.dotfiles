@@ -1,5 +1,5 @@
 function SetColorScheme(color)
-    local colorscheme = color or 'tokyonight-night'
+    local colorscheme = color or 'sonokai'
 
     local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
     if not status_ok then

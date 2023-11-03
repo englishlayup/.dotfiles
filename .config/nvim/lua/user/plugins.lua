@@ -32,8 +32,11 @@ require('lazy').setup {
     -- Seamlessly navigate between vim and tmux splits
     'christoomey/vim-tmux-navigator',
 
+    -- Color schemes
     'ellisonleao/gruvbox.nvim',
     'folke/tokyonight.nvim',
+    'sainnhe/sonokai',
+    { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
     {
         -- LSP Configuration & Plugins
         'neovim/nvim-lspconfig',
