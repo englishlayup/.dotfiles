@@ -46,7 +46,13 @@ cmp.setup {
     mapping = {
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-Space>'] = cmp.mapping(function()
+            if cmp.visible() and cmp.get_selected_entry() then
+                cmp.confirm { behavior = cmp.ConfirmBehavior.Replace }
+            else
+                cmp.mapping.complete()
+            end
+        end),
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping {
             i = function(fallback)
@@ -61,7 +67,11 @@ cmp.setup {
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                cmp.select_next_item()
+                if #cmp.get_entries() == 1 then
+                    cmp.confirm { select = true }
+                else
+                    cmp.select_next_item()
+                end
             elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
             else
