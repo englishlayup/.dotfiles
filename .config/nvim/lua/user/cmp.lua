@@ -56,8 +56,8 @@ cmp.setup {
         ['<C-e>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping {
             i = function(fallback)
-                if cmp.visible() and cmp.get_active_entry() then
-                    cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+                if cmp.visible() and cmp.get_selected_entry() then
+                    cmp.confirm { behavior = cmp.ConfirmBehavior.Replace }
                 else
                     fallback()
                 end
@@ -67,11 +67,7 @@ cmp.setup {
         },
         ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
-                if #cmp.get_entries() == 1 then
-                    cmp.confirm { select = true }
-                else
-                    cmp.select_next_item()
-                end
+                cmp.select_next_item()
             elseif luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
             else
