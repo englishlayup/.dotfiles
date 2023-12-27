@@ -1,12 +1,3 @@
-# Always launch tmux if not already in tmux
-if command -v tmux &> /dev/null \
-    && [ -n "$PS1" ] \
-    && [[ ! "$TERM" =~ screen ]] \
-    && [[ ! "$TERM" =~ tmux ]] \
-    && [ -z "$TMUX" ]; then
-    tmux new-session -A -s main
-fi
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -18,6 +9,7 @@ fi
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias ll="ls -lha"
 alias la="ls -ah"
+alias l="ls"
 
 # Basic auto/tab complete:
 autoload -U compinit
