@@ -18,6 +18,9 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
+# PATH
+export PATH=$HOME/.local/scripts:$PATH
+
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
@@ -116,6 +119,9 @@ bindkey '^ ' autosuggest-accept
 # fzf key-bindings and completion
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
+
+# launch tmux-sessionizer with ctrl-f
+bindkey -s ^f "tmux-sessionizer\n"
 
 # zsh-z config
 source $HOME/.zsh/plugins/zsh-z/zsh-z.plugin.zsh

@@ -29,4 +29,8 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Generate annotations
-vim.keymap.set('n', '<leader>ga', ":lua require('neogen').generate()<CR>", { desc = '[G]enerate [A]nnotations', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ga', ":lua require('neogen').generate()<CR>",
+    { desc = '[G]enerate [A]nnotations', noremap = true, silent = true })
+
+-- tmux-sessionizer
+vim.keymap.set('n', '<C-f>', ":silent !tmux neww tmux-sessionizer<CR>", { silent = true })
