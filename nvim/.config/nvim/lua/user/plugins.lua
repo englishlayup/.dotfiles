@@ -171,7 +171,6 @@ require('lazy').setup {
         end,
     },
     'nvim-tree/nvim-web-devicons',
-    'github/copilot.vim',
     'akinsho/toggleterm.nvim',
     {
         'nvimtools/none-ls.nvim',
