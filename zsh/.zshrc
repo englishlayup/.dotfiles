@@ -9,7 +9,7 @@ fi
 alias config="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias ll="ls -lha"
 alias la="ls -ah"
-alias l="ls"
+alias l="ls -l"
 
 # Basic auto/tab complete:
 autoload -U compinit
