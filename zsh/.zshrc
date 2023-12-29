@@ -113,8 +113,9 @@ source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^ ' autosuggest-accept
 
-# load fzf
-[ -f $HOME/.fzf.zsh ] && source $HOME/.fzf.zsh
+# fzf key-bindings and completion
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 
 # zsh-z config
 source $HOME/.zsh/plugins/zsh-z/zsh-z.plugin.zsh
