@@ -111,6 +111,26 @@ autoload -U add-zsh-hook
 add-zsh-hook preexec _reload_env
 add-zsh-hook chpwd _activate_venv
 
+# cd using dirname
+setopt auto_cd
+
+# auto fix small errors
+setopt nocaseglob
+setopt correct
+
+# navigating to project root
+r () {
+    cd "$(git rev-parse --show-toplevel 2>/dev/null)"
+}
+
+# quickly create a tmp dir
+tmp () {
+    [ "$1" = "view" ] && cd /tmp/workspaces && cd $(ls -t | fzf --preview 'ls -A {}') && return 0
+    r="/tmp/workspaces/$(xxd -l3 -ps /dev/urandom)"
+    mkdir -p -p "$r" && pushd "$r"
+    git init "$r"
+}
+
 # zsh-autosuggestions config
 source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
