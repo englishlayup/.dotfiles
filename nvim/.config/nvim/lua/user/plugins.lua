@@ -35,7 +35,6 @@ require('lazy').setup {
     -- Color schemes
     'ellisonleao/gruvbox.nvim',
     'folke/tokyonight.nvim',
-    'sainnhe/sonokai',
     { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
     {
         -- LSP Configuration & Plugins
