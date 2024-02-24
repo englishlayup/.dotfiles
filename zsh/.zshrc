@@ -118,8 +118,8 @@ setopt auto_cd
 setopt nocaseglob
 setopt correct
 
-# navigating to project root
-r () {
+# navigating to git root
+gr () {
     cd "$(git rev-parse --show-toplevel 2>/dev/null)"
 }
 
