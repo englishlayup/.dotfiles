@@ -79,7 +79,29 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics [Q]uickfix list' })
 
 -- Generate annotations
-vim.keymap.set('n', '<leader>ga', ":lua require('neogen').generate()<CR>", { desc = '[G]enerate [A]nnotations', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ga', ":lua require('neogen').generate()<CR>",
+  { desc = '[G]enerate [A]nnotations', noremap = true, silent = true })
 
 -- tmux-sessionizer
 vim.keymap.set('n', '<C-f>', ':silent !tmux neww tmux-sessionizer<CR>', { silent = true })
+
+-- Keybinds to make split navigation easier.
+--  Use ALT+<hjkl> to switch between windows
+--
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<A-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<A-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<A-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<A-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set('t', '<A-h>', '<C-\\><C-N><C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('t', '<A-l>', '<C-\\><C-N><C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('t', '<A-j>', '<C-\\><C-N><C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('t', '<A-k>', '<C-\\><C-N><C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+vim.keymap.set('n', '<C-w>+', '<cmd>resize +5<CR>', { desc = 'Increase current window height by 5' })
+vim.keymap.set('n', '<C-w>-', '<cmd>resize -5<CR>', { desc = 'Decrease current window height by 5' })
+vim.keymap.set('n', '<C-w>>', '<cmd>vertical resize +5<CR>', { desc = 'Increase current window width by 5' })
+vim.keymap.set('n', '<C-w><', '<cmd>vertical resize -5<CR>', { desc = 'Decrease current window width by 5' })
