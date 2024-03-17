@@ -92,12 +92,13 @@ cmp.setup {
     end,
   },
 
-  sources = {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+  }, {
     { name = 'buffer' },
     { name = 'path' },
-  },
+  }),
 }
 
 -- Set configuration for specific filetype.
@@ -118,8 +119,9 @@ cmp.setup.cmdline(':', {
   }, {
     {
       name = 'cmdline',
-      keyword_pattern = [=[[^[:blank:]\!]*]=],
-      keyword_length = 4,
+      option = {
+        ignore_cmds = { 'Man', '!' },
+      },
     },
   }),
 })
