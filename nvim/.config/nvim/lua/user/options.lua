@@ -31,7 +31,6 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Preview substitutions live, as you type
 vim.opt.inccommand = 'split'
 
-vim.o.have_nerd_font = true
 vim.o.showcmd = false
 vim.o.errorbells = false
 vim.o.swapfile = false
