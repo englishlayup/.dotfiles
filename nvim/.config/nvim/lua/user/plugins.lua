@@ -40,7 +40,7 @@ require('lazy').setup({
       -- Useful status updates for LSP
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      'folke/lazydev.nvim',
     },
   },
 
