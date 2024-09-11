@@ -54,7 +54,7 @@ require('lazy').setup({
       },
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black' },
+        python = { 'ruff' },
         bzl = { 'buildifier' },
       },
     },
@@ -65,7 +65,7 @@ require('lazy').setup({
     config = function()
       require('lint').linters_by_ft = {
         bzl = { 'buildifier' },
-        python = { 'pylint' },
+        python = { 'ruff' },
         bash = { 'shellcheck' },
       }
       vim.api.nvim_create_autocmd({ 'VimEnter', 'BufWritePost' }, {

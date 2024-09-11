@@ -104,7 +104,7 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 local servers = {
   clangd = {},
   gopls = {},
-  jedi_language_server = {},
+  ruff = {},
   rust_analyzer = {},
   bashls = {},
   bzl = {},
@@ -140,10 +140,8 @@ require('mason').setup()
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
   'stylua',
-  'pylint',
   'shellcheck',
-  'isort',
-  'black',
+  'buildifier',
 })
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
