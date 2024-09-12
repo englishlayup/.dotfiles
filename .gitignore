@@ -4,3 +4,6 @@
 # config files
 .luarc.json
 lazy-lock.json
+fish_history
+fishd.*
+fish_variables
