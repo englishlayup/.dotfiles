@@ -12,7 +12,7 @@ vim.diagnostic.config {
   update_in_insert = true,
   severity_sort = true,
   float = {
-    source = 'always',
+    source = 'if_many',
   },
 }
 
@@ -51,6 +51,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, '[W]orkspace [L]ist Folders')
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client == nil then
+      return
+    end
+
     if client.server_capabilities.documentHighlightProvider then
       vim.api.nvim_create_augroup('lsp_document_highlight', {
         clear = false,
