@@ -108,7 +108,19 @@ capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp'
 local servers = {
   clangd = {},
   gopls = {},
-  ruff = {},
+  pyright = {
+    settings = {
+      pyright = {
+        -- Using Ruff's import organizer
+        disableOrganizeImports = true,
+      },
+      python = {
+        analysis = {
+          typeCheckingMode = 'strict',
+        },
+      },
+    },
+  },
   rust_analyzer = {},
   bashls = {},
   bzl = {},
@@ -143,6 +155,7 @@ require('mason').setup()
 -- for you, so that they are available from within Neovim.
 local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
+  'ruff',
   'stylua',
   'shellcheck',
   'buildifier',
