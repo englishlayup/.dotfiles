@@ -104,3 +104,20 @@ vim.keymap.set('n', '<C-w>+', '<cmd>resize +5<CR>', { desc = 'Increase current w
 vim.keymap.set('n', '<C-w>-', '<cmd>resize -5<CR>', { desc = 'Decrease current window height by 5' })
 vim.keymap.set('n', '<C-w>>', '<cmd>vertical resize +5<CR>', { desc = 'Increase current window width by 5' })
 vim.keymap.set('n', '<C-w><', '<cmd>vertical resize -5<CR>', { desc = 'Decrease current window width by 5' })
+
+vim.api.nvim_create_user_command('FormatDisable', function(args)
+  if args.bang then
+    vim.b.disable_autoformat = true
+  else
+    vim.g.disable_autoformat = true
+  end
+end, {
+  desc = 'Disable autoformat-on-save',
+  bang = true,
+})
+vim.api.nvim_create_user_command('FormatEnable', function()
+  vim.b.disable_autoformat = false
+  vim.g.disable_autoformat = false
+end, {
+  desc = 'Re-enable autoformat-on-save',
+})
