@@ -3,7 +3,7 @@
 -- Remap space as leader key
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = '\\'
 
 -- Indent opts
 vim.o.tabstop = 4
@@ -54,8 +54,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Return to last edit position when opening files
 vim.cmd [[autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
 
--- netrw
-vim.keymap.set('n', '<leader>nn', vim.cmd.Ex)
+vim.keymap.set('n', '-', '<cmd>Oil<CR>', { desc = 'Open parent directory' })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -70,16 +69,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating [E]rror message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics [Q]uickfix list' })
-
--- Generate annotations
-vim.keymap.set('n', '<leader>ga', ":lua require('neogen').generate()<CR>",
-  { desc = '[G]enerate [A]nnotations', noremap = true, silent = true })
 
 -- tmux-sessionizer
 vim.keymap.set('n', '<C-f>', ':silent !tmux neww tmux-sessionizer<CR>', { silent = true })
@@ -115,9 +104,31 @@ end, {
   desc = 'Disable autoformat-on-save',
   bang = true,
 })
+
 vim.api.nvim_create_user_command('FormatEnable', function()
   vim.b.disable_autoformat = false
   vim.g.disable_autoformat = false
 end, {
   desc = 'Re-enable autoformat-on-save',
 })
+
+-- Terminal
+
+-- Start terminal in insert mode
+vim.cmd [[autocmd TermOpen * startinsert]]
+
+vim.api.nvim_create_user_command('PythonRepl', function()
+  vim.cmd.term 'python3'
+end, {
+  desc = 'Launch a Python repl',
+})
+
+vim.keymap.set('n', '<leader>py', '<cmd>PythonRepl<CR>', { desc = 'Start [Py]thon REPL' })
+
+vim.keymap.set('n', '<leader>t', function()
+    vim.cmd.vnew()
+    vim.cmd.term()
+    vim.cmd.wincmd 'J'
+    vim.api.nvim_win_set_height(0, 15)
+  end,
+  { desc = 'Start [T]erminal' })
