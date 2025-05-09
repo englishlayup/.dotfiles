@@ -36,6 +36,7 @@ return {
             },
           },
         },
+        ruff = {},
         bashls = {},
         bzl = {},
       }
