@@ -1,8 +1,8 @@
 return {
   {
     'saghen/blink.cmp',
-    dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    version = 'v1.*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -11,21 +11,27 @@ return {
         ['<C-l>'] = { 'snippet_forward', 'fallback' },
         ['<C-h>'] = { 'snippet_backward', 'fallback' },
       },
-      appearance = {
-        use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'normal'
-      },
       signature = { enabled = true },
       sources = {
-        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+        per_filetype = {
+          lua = { inherit_defaults = true, 'lazydev' }
+        },
         providers = {
           lazydev = {
             name = 'LazyDev',
             module = 'lazydev.integrations.blink',
             score_offset = 100,
           },
+          path = {
+            opts = {
+              get_cwd = function(_)
+                return vim.fn.getcwd()
+              end,
+            },
+          },
         },
       },
     },
+    opts_extend = { 'sources.default' }
   },
 }
