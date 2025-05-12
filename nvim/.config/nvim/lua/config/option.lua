@@ -70,9 +70,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- tmux-sessionizer
-vim.keymap.set('n', '<C-f>', ':silent !tmux neww tmux-sessionizer<CR>', { silent = true })
-
 -- Keybinds to make split navigation easier.
 --  Use ALT+<hjkl> to switch between windows
 --

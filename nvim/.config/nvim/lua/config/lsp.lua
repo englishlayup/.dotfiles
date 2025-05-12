@@ -25,28 +25,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-
     -- Note: To jump back, press <C-T>
     map('gd', require 'telescope.builtin'.lsp_definitions, '[G]oto [D]efinition')
-    map('gr', require 'telescope.builtin'.lsp_references, '[G]oto [R]eferences')
-    map('gI', require 'telescope.builtin'.lsp_implementations, '[G]oto [I]mplementation')
     map('<leader>D', require 'telescope.builtin'.lsp_type_definitions, 'Type [D]efinition')
     map('<leader>ds', require 'telescope.builtin'.lsp_document_symbols, '[D]ocument [S]ymbols')
     map('<leader>ws', require 'telescope.builtin'.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-    map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-    map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-    map('K', vim.lsp.buf.hover, 'Hover Documentation')
     map('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-    -- Lesser used LSP functionality
-    map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-    map('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-    map('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-    map('<leader>wl', function()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, '[W]orkspace [L]ist Folders')
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if not client then
@@ -73,7 +57,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    if client.supports_method 'textDocument/formatting' then
+    if client:supports_method 'textDocument/formatting' then
       vim.api.nvim_create_augroup('lsp_document_format', {})
       vim.api.nvim_clear_autocmds { group = 'lsp_document_format', buffer = event.buf }
       vim.api.nvim_create_autocmd('BufWritePre', {
