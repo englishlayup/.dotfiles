@@ -121,3 +121,21 @@ vim.api.nvim_create_user_command('Format', function(args)
   end
   require 'conform'.format { async = true, lsp_format = 'fallback', range = range }
 end, { range = true })
+
+vim.keymap.set('n', 'yd', function()
+    -- get 0-based current line
+    local row = vim.api.nvim_win_get_cursor(0)[1] - 1
+    -- fetch diagnostics for this buffer & line
+    local diags = vim.diagnostic.get(0, { lnum = row })
+    if vim.tbl_isempty(diags) then
+      vim.notify('No diagnostics on this line', vim.log.levels.INFO)
+      return
+    end
+    -- collect messages and join them
+    local msgs = vim.tbl_map(function(d) return d.message end, diags)
+    local text = table.concat(msgs, '\n')
+    -- copy to system clipboard
+    vim.fn.setreg('+', text)
+    vim.notify('Copied diagnostics', vim.log.levels.INFO)
+  end,
+  { desc = '[Y]ank [D]iagnostic on current line', silent = true })
