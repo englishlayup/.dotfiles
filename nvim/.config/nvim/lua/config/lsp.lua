@@ -16,6 +16,10 @@ vim.diagnostic.config {
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating [E]rror message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics [Q]uickfix list' })
+vim.keymap.set('n', '<leader>wq', function()
+  vim.diagnostic.setqflist()
+  vim.cmd 'copen'
+end, { desc = 'Open [W]orkspace diagnostics in [Q]uickfix' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
