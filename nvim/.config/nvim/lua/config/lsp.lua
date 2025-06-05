@@ -30,10 +30,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     -- Note: To jump back, press <C-T>
-    map('gd', require 'telescope.builtin'.lsp_definitions, '[G]oto [D]efinition')
-    map('<leader>D', require 'telescope.builtin'.lsp_type_definitions, 'Type [D]efinition')
-    map('<leader>ds', require 'telescope.builtin'.lsp_document_symbols, '[D]ocument [S]ymbols')
-    map('<leader>ws', require 'telescope.builtin'.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    map('grd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+    map('grD', vim.lsp.buf.type_definition, 'Type [D]efinition')
+    map('grs', vim.lsp.buf.document_symbol, '[D]ocument [S]ymbols')
+    map('grws', vim.lsp.buf.workspace_symbol, '[W]orkspace [S]ymbols')
     map('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
